@@ -1,0 +1,100 @@
+/*CSS syles for work schedule */
+/*Body of the web page */
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+textarea{
+    background: transparent;
+    height: 100%;
+    width:100%;
+    border: none;
+    resize: none;
+    color: #000000;
+    padding: 10px;
+  }
+  /*Header style for content in fluid jumbotron - bootstrap*/
+.jumbotron {
+    text-align: center;
+    font-size: 15px;
+    background-color: black;
+    color:lightpink;
+    border-radius: 0;
+    padding: 5px;
+  }
+.display-3 {
+     font-size: 52px;
+     font-weight: bold;
+  }
+
+ #currentDay {
+      font-size: 24px;
+      color: lemonchiffon;
+  }
+.lead {
+      font-size: 30px; color: white;
+  }
+  
+  /*Styles for the body of the calender*/ 
+
+.description{
+    white-space: pre-wrap;
+  }
+  
+.time-block{
+    text-align: center;
+    border-radius: 5px;
+  }
+  
+.row {
+    white-space: pre-wrap;
+    height: 75px;
+    border-top: 5px solid white;
+    padding-top: 0%;
+    padding-bottom: 100px;
+  }
+
+.col-md-8{
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  
+.hour {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 20px;
+    text-align: right;
+  }
+  
+.past {
+    background-color: lemonchiffon;
+    color: white;
+  }
+  
+.present {
+    background-color:lightpink;
+    color: white;
+  }
+  
+.future {
+    background-color: lightgray;
+    color: white;
+  }
+  
+  /*Styles for buttons*/   
+.saveBtn {
+    border-left: 1px solid black;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color:black;
+    color: lightpink;
+    height: 100%;
+    width:100%;
+  }
+  
+.saveBtn i:hover {
+    font-size: 75px;
+    transition: all .3s ease-in-out;
+  }
