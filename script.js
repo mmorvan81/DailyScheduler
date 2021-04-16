@@ -1,59 +1,140 @@
 
-//Local storage is a property that allows this JavaScript site to save key in a browser so it continues to run after the browser window is closed.
-function getLocalStorage(key) {
-    let value = localStorage.getItem(key);
-    if (value) {
-        $(`#text${key}`).text(value);
-    }
+var myDaily = [ 
+{   id: "0",
+    hour: "8:00",
+    time: "08",
+    daynight: "am",
+    memo: ""
+    },
+{
+    id: "1",
+    hour: "9:00",
+    time: "09",
+    daynight: "am",
+    memo: ""
+    },
+{
+    id: "2",
+    hour: "10:00",
+    time: "10",
+    daynight: "am",
+    memo: ""
+    },
+{
+    id: "3",
+    hour: "11:00",
+    time: "11",
+    daynight: "pm",
+    memo: ""
+    },
+{
+    id: "4",
+    hour: "12:00",
+    time: "12",
+    daynight: "pm",
+    memo: ""
+    },
+{
+    id: "5",
+    hour: "1:00",
+    time: "13",
+    daynight: "pm",
+    memo: ""
+    },
+{
+    id: "6",
+    hour: "2:00",
+    time: "14",
+    daynight: "pm",
+    memo: ""
+    },
+{
+    id: "7",
+    hour: "3:00",
+    time: "15",
+    daynight: "pm",
+    memo: ""
+    },
+{
+    id: "8",
+    hour: "4:00",
+    time: "16",
+    daynight: "pm",
+    memo: ""
+    }, ]
+
+function obtainHeaderDay() {
+    var presentDay = moment().format('dddd, MMMM Do, h:mm:ss a');
+    $("#presentDay").text(presentDay);
 }
-// Creating the real time function in the jumbotron
-$( document ).ready(function() {
-    $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
+obtainHeaderDay();
+
+function saveMemos() {
+    localStorage.setItem("myDaily", JSON.stringify(myDaily));
+}
+function displayMemos() {
+    myDaily.forEach(function (_currHr) {
+        $(`#${_currHr.id}`).val(_currHr.memo);
+    })
+}
+function init() {
+    var reserveDay = JSON.parse(localStorage.getItem("myDaily"));
+    if (reserveDay) {
+        myDaily = reserveDay;
+    }
+    saveMemos();
+    displayMemos();
+}
+myDaily.forEach(function(currHr) {  
+    var hrlyRow = $("<form>").attr({
+        "class": "row"
+    });
+    $(".container").append(hrlyRow);
+
+    var hrlyField = $("<div>")          //time blocks in the calendar
+        .text(`${currHr.hour}${currHr.daynight}`)
+        .attr({
+            "class": "col-md-2 hour"
+    });
+    var hrlyInfo = $("<div>")           //date blocks for the input information; appt., tasks, 
+        .attr({
+            "class": "col-md-9 description p-0"
+        });
+
+    var plannerData= $("<textarea>");
+
+    hrlyInfo.append(plannerData);
     
-//Creating the time slots for the calender and inserting a row and columns based on user imput
-    for (let i = 8; i < 18; i++) {
-        var row = $(`<div data-time=${i} id='${i}' class="row">`);
-        var column1 = $('<div class="col-sm-2"> <p class="hour">' + formatAMPM(i) + '</p>');
-        var column2 = $(`<div class="col-sm-8 past"><textarea id=text${i} class="description" placeholder="Click here and schedule your appointment or activity"></textarea>`);        
-        var column3 = $(`<div class="col-sm-2"><button class="saveBtn" id=${i}><i class="fas fa-save"></i></button>`)
-//Appending the three columns to the row
-        row.append(column1);
-        row.append(column2);
-        row.append(column3);
-//Adding the row to the container jQuery
-        $(".container").append(row);
-
-        getLocalStorage(i);
+    plannerData.attr("id", currHr.id);
+    if (currHr.time < moment().format("HH")) {
+        plannerData.attr ({
+            "class": "past", 
+        })
+    } else if (currHr.time === moment().format("HH")) {
+        plannerData.attr({
+            "class": "present"
+        })
+    } else if (currHr.time > moment().format("HH")) {
+        plannerData.attr({
+            "class": "future"
+        })
     }
-//Adding the function for the daily hours
-    function formatAMPM(hours) {
-        var ampm = hours >= 12 ? ':00pm' : ':00am';
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-        return hours + ampm;
-    }
-formatAMPM();
 
-//Adding the function for the color changes based on data
-function updateColors(){
-        var currentTime = new Date().getHours();
-        for (var i = 9; i < 18; i++) { 
-        console.log(currentTime, $(`#${i}`).data("time"));
-         if ($(`#${i}`).data("time") == currentTime){
-            $(`#text${i}`).addClass( "present");
-        } else if (currentTime < $(`#${i}`).data("time")) {
-            $(`#text${i}`).addClass( "future");
-        }
-    }
-}
+    var saveButton = $("<i class='far fa-save fa-lg'></i>")
+    var reservePlanner = $("<button>")
+        .attr({
+            "class": "col-md-1 saveBtn"
+    });
+    reservePlanner.append(saveButton);
+    hrlyRow.append(hrlyField, hrlyInfo, reservePlanner);
+})
+init();
 
-setInterval(function() {
-    updateColors();
-}, 1000);
-
-var saveBtn = $('.saveBtn');
-saveBtn.on('click', function(){
-    let eventId = $(this).attr('id');
-    let eventText = $(this).parent().siblings().children('.description').val();
-    localStorage.setItem(eventId, eventText);
-});});
+$(".saveBtn").on("click", function(event) {
+    event.preventDefault();
+    var saveIndex = $(this).siblings(".description").children(".future").attr("id");
+    myDaily[saveIndex].memo = $(this).siblings(".description").children(".future").val();
+    console.log(saveIndex);
+    saveMemos();
+    displayMemos();
+})

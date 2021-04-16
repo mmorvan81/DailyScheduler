@@ -1,100 +1,95 @@
-/*CSS syles for work schedule */
-/*Body of the web page */
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-  }
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  line-height: 1.1.75;
+}
+
+.display-6 {
+  font-size: 41px;
+  font-weight: bold;
+}
+
+.lead {
+  color: lemonchiffon;
+  font-size: 24px;
+}
+
+#presentDay {
+  font-size: 24px;
+  color:white;
+}
 
 textarea{
-    background: transparent;
-    height: 100%;
-    width:100%;
-    border: none;
-    resize: none;
-    color: #000000;
-    padding: 10px;
-  }
-  /*Header style for content in fluid jumbotron - bootstrap*/
-.jumbotron {
-    text-align: center;
-    font-size: 15px;
-    background-color: black;
-    color:lightpink;
-    border-radius: 0;
-    padding: 5px;
-  }
-.display-3 {
-     font-size: 52px;
-     font-weight: bold;
-  }
-
- #currentDay {
-      font-size: 24px;
-      color: lemonchiffon;
-  }
-.lead {
-      font-size: 30px; color: white;
-  }
-  
-  /*Styles for the body of the calender*/ 
+  align-items: center;
+  background: transparent;
+  border: none;
+  resize: none;
+  background: transparent;
+  color:black;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
 
 .description{
-    white-space: pre-wrap;
-  }
-  
-.time-block{
-    text-align: center;
-    border-radius: 5px;
-  }
-  
-.row {
-    white-space: pre-wrap;
-    height: 75px;
-    border-top: 5px solid white;
-    padding-top: 0%;
-    padding-bottom: 100px;
-  }
+  white-space: pre-wrap;
+}
 
-.col-md-8{
-    padding-right: 0px;
-    padding-left: 0px;
-  }
-  
+.jumbotron {
+  text-align: center;
+  background-color: black;
+  color:lightpink;
+  border-radius: 0;
+  padding-bottom: 5px;
+  padding-top: 10px
+}
+
+.time-block{
+  text-align: center;
+  border-radius: 4px;
+}
+
+.row {
+  border-top: 5px solid white;
+  white-space: pre-wrap;
+  height: 75px;
+  padding-bottom: 100px;
+  padding-top: 0%;
+}
+
 .hour {
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 20px;
-    text-align: right;
-  }
-  
+  background-color: white;
+  color:black; 
+  padding: 10px;
+  text-align: right;
+  text-transform: uppercase;
+}
+
 .past {
-    background-color: lemonchiffon;
-    color: white;
-  }
-  
+  background-color:lemonchiffon;
+  color: black;
+}
+
 .present {
-    background-color:lightpink;
-    color: white;
-  }
-  
+  background-color:lightpink;
+  color:white;
+}
+
 .future {
-    background-color: lightgray;
-    color: white;
-  }
-  
-  /*Styles for buttons*/   
+  background-color: lightgrey;
+  color: black;
+}
+
 .saveBtn {
-    border-left: 1px solid black;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    background-color:black;
-    color: lightpink;
-    height: 100%;
-    width:100%;
-  }
-  
-.saveBtn i:hover {
-    font-size: 75px;
-    transition: all .3s ease-in-out;
-  }
+  background-color: black;
+  color: lightpink;
+  border-left: 1px solid black;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 20px;
+
+}
+
+.saveBtn:hover {
+  font-size: 40px;
+  transition: all .5s ease-in-out;
+}
