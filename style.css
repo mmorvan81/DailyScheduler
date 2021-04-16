@@ -65,17 +65,17 @@ textarea{
   text-transform: uppercase;
 }
 
-.past {
+.completed {
   background-color:lemonchiffon;
   color: black;
 }
 
-.present {
+.current {
   background-color:lightpink;
   color:white;
 }
 
-.future {
+.upcoming{
   background-color: lightgrey;
   color: black;
 }

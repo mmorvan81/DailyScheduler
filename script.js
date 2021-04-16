@@ -1,5 +1,5 @@
 
-var myDaily = [ 
+var myDailyCalendar = [ 
 {   id: "0",
     hour: "8:00",
     time: "08",
@@ -70,36 +70,30 @@ function obtainHeaderDay() {
 obtainHeaderDay();
 
 function saveMemos() {
-    localStorage.setItem("myDaily", JSON.stringify(myDaily));
+    localStorage.setItem("myDaily", JSON.stringify(myDailyCalendar));
 }
 function displayMemos() {
-    myDaily.forEach(function (_currHr) {
+    myDailyCalendar.forEach(function (_currHr) {
         $(`#${_currHr.id}`).val(_currHr.memo);
     })
 }
 function init() {
-    var reserveDay = JSON.parse(localStorage.getItem("myDaily"));
+    var reserveDay = JSON.parse(localStorage.getItem("myDailyCalendar"));
     if (reserveDay) {
-        myDaily = reserveDay;
+        myDailyCalendar = reserveDay;
     }
     saveMemos();
     displayMemos();
 }
-myDaily.forEach(function(currHr) {  
-    var hrlyRow = $("<form>").attr({
-        "class": "row"
-    });
+myDailyCalendar.forEach(function(currHr) {  
+    var hrlyRow = $("<form>").attr({"class": "row"});
     $(".container").append(hrlyRow);
 
-    var hrlyField = $("<div>")          //time blocks in the calendar
+    var hrlyField = $("<div>") 
         .text(`${currHr.hour}${currHr.daynight}`)
-        .attr({
-            "class": "col-md-2 hour"
-    });
-    var hrlyInfo = $("<div>")           //date blocks for the input information; appt., tasks, 
-        .attr({
-            "class": "col-md-9 description p-0"
-        });
+        .attr({ "class": "col-md-2 hour"});
+    var hrlyInfo = $("<div>") 
+        .attr({"class": "col-md-9 description p-0"});
 
     var plannerData= $("<textarea>");
 
@@ -107,24 +101,16 @@ myDaily.forEach(function(currHr) {
     
     plannerData.attr("id", currHr.id);
     if (currHr.time < moment().format("HH")) {
-        plannerData.attr ({
-            "class": "past", 
-        })
+        plannerData.attr ({"class": "completed", })
     } else if (currHr.time === moment().format("HH")) {
-        plannerData.attr({
-            "class": "present"
-        })
+        plannerData.attr({ "class": "current" })
     } else if (currHr.time > moment().format("HH")) {
-        plannerData.attr({
-            "class": "future"
-        })
+        plannerData.attr({ "class": "upcoming"})
     }
 
     var saveButton = $("<i class='far fa-save fa-lg'></i>")
     var reservePlanner = $("<button>")
-        .attr({
-            "class": "col-md-1 saveBtn"
-    });
+        .attr({"class": "col-md-1 saveBtn"});
     reservePlanner.append(saveButton);
     hrlyRow.append(hrlyField, hrlyInfo, reservePlanner);
 })
@@ -132,8 +118,8 @@ init();
 
 $(".saveBtn").on("click", function(event) {
     event.preventDefault();
-    var saveIndex = $(this).siblings(".description").children(".future").attr("id");
-    myDaily[saveIndex].memo = $(this).siblings(".description").children(".future").val();
+    var saveIndex = $(this).siblings(".description").children(".upcoming").attr("id");
+    myDailyCalendar[saveIndex].memo = $(this).siblings(".description").children(".upcoming").val();
     console.log(saveIndex);
     saveMemos();
     displayMemos();
